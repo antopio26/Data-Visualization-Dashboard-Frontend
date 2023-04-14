@@ -1,0 +1,59 @@
+[
+    {
+        "type": "three",
+        "config": {
+        },
+        "cols": 2,
+        "rows": 3, 
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "graph",
+        "config": {
+            "title": "Orientation",
+            "socket": {
+                "name": "backend",
+                "event": "gyro"
+            },
+            "lineWidth": 2,
+            "datasets": [
+                {
+                    "label": "X",
+                    "color": "#ee6352"
+                },
+                {
+                    "label": "Y",
+                    "color": "#59cd90"
+                },
+                {
+                    "label": "Z",
+                    "color": "#3fa7d6"
+                }
+            ]
+
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 0
+    },
+    {
+        "type": "graph",
+        "config": {
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 1
+    },
+    {
+        "type": "graph",
+        "config": {
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 2
+    }
+]

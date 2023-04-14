@@ -1,0 +1,78 @@
+[
+    {
+        "type": "three",
+        "config": {
+        },
+        "cols": 2,
+        "rows": 3, 
+        "x": 0,
+        "y": 0
+    },
+    {
+        "type": "graph",
+        "config": {
+            "title": "Orientation X",
+            "socket": {
+                "name": "backend",
+                "event": "gyro"
+            },
+            "lineWidth": 2,
+            "datasets": [
+                {
+                    "label": "X",
+                    "key": "x",
+                    "color": "#ee6352"
+                }
+            ]
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 0
+    },
+    {
+        "type": "graph",
+        "config": {
+            "title": "Orientation Y",
+            "socket": {
+                "name": "backend",
+                "event": "gyro"
+            },
+            "lineWidth": 2,
+            "datasets": [
+                {
+                    "label": "Y",
+                    "key": "y",
+                    "color": "#59cd90"
+                }
+            ]
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 1
+    },
+    {
+        "type": "graph",
+        "config": {
+            "title": "Orientation Z",
+            "socket": {
+                "name": "backend",
+                "event": "gyro"
+            },
+            "lineWidth": 2,
+            "dataKey": "z",
+            "datasets": [
+                {
+                    "label": "Z",
+                    "key": "z",
+                    "color": "#3fa7d6"
+                }
+            ]
+        },
+        "cols": 2,
+        "rows": 1, 
+        "x": 2,
+        "y": 2
+    }
+]

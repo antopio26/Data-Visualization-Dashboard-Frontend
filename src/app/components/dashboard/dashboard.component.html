@@ -1,0 +1,23 @@
+<div class="flex flex-col h-screen">
+    <header class="flex justify-between items-center bg-gray-100 border">
+        <div class="flex-1 mx-auto px-5 py-4">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900 ">Dashboard</h1>
+        </div>
+
+        <div class="flex-2 mx-auto px-5 py-4">
+            <app-button (btnClick)="toggleEditMode()" btnStyle="primary" text="Edit" [icon]="faPen"></app-button>
+        </div>
+    </header>
+
+    <main class="flex-auto">
+        <div class="h-full">
+            <gridster *ngIf="dashboard.length" [options]="options" class="bg-white">
+                <gridster-item [item]="item" *ngFor="let item of dashboard" class="shadow-lg border flex flex-col rounded-md">
+                    <!-- Select between graph widget and three widget based on item.type -->
+                    <app-graph-widget [config]="item.config" *ngIf="item.type === 'graph'"></app-graph-widget>
+                    <app-three-widget [config]="item.config" *ngIf="item.type === 'three'"></app-three-widget>
+                </gridster-item>
+            </gridster>
+        </div>
+    </main>
+</div>

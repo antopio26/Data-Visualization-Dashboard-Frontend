@@ -1,0 +1,19 @@
+- Gestione Preset
+
+- Integrazione con ng-bootstrap
+
+- Migliore gestione degli stili dei bottoni
+
+- Barra superiore interattiva per la edit mode
+- Tasto di aggiunta widget (in edit mode)
+             |
+            \ /
+             v
+- Modal di aggiunta widget
+
+- Animazione ombre in ingresso e uscita da edit mode
+
+- Tendina aggiunta
+    - Socket
+
+- ThreeJS widget
