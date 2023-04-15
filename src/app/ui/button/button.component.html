@@ -3,8 +3,8 @@
     [type]="type"
 	(click)="onClick()"
 	[disabled]="isDisabled"
-    class="inline-flex items-center rounded-md {{buttonStyle.button}} px-3 py-2 ">
-        <fa-icon *ngIf="icon" class="-ml-0.5 mr-1.5 h-5 w-5 {{buttonStyle.icon}}" [icon]="icon"></fa-icon>
+    class="inline-flex items-center rounded-md button {{btnStyle}} px-3 py-2 ">
+        <fa-icon *ngIf="icon" class="-ml-0.5 mr-1.5 h-5 w-5 icon {{btnStyle}}" [icon]="icon"></fa-icon>
         {{buttonText}}
     </button>
 </span>

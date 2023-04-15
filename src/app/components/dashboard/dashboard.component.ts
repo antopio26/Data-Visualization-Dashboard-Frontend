@@ -8,7 +8,7 @@ import { faPen, faSave } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

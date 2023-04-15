@@ -9,7 +9,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-graph-widget',
   templateUrl: './graph-widget.component.html',
-  styleUrls: ['./graph-widget.component.css'],
+  styleUrls: ['./graph-widget.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
