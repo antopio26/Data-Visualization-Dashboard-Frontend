@@ -10,7 +10,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { GraphWidgetComponent } from './components/graph-widget/graph-widget.component';
 import { ThreeWidgetComponent } from './components/three-widget/three-widget.component';
-import { ButtonComponent } from './ui/button/button.component';
 
 import { SocketProviderService } from './services/socket-provider.service';
 import { PresetManagerService } from './services/preset-manager.service';
@@ -21,8 +20,7 @@ import { PresetManagerService } from './services/preset-manager.service';
     AppComponent,
     DashboardComponent,
     GraphWidgetComponent,
-    ThreeWidgetComponent,
-    ButtonComponent
+    ThreeWidgetComponent
   ],
   imports: [
     BrowserModule,
