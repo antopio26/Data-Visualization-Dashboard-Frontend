@@ -1,0 +1,87 @@
+.button {
+    @apply 
+      inline-flex items-center
+      px-3 py-1.5
+      font-mono font-semibold
+      rounded-md
+      shadow-sm;
+  
+      fa-icon {
+        @apply 
+          h-6 w-6
+          -ml-0.5 mr-1.5
+      }
+  }
+  
+  .primary.button {
+    @apply 
+      bg-slate-700 text-white
+      hover:bg-slate-800;
+      
+      fa-icon {
+        @apply text-white;
+      }  
+  }
+  
+  .secondary.button {
+    @apply 
+      bg-white text-slate-700
+      hover:bg-slate-50
+      ring-1 ring-slate-300;
+  
+      fa-icon {
+        @apply text-slate-600;
+      }  
+  }
+  
+  .success.button {
+    @apply 
+      bg-lime-500 text-white
+      hover:bg-lime-400;
+  
+      fa-icon {
+        @apply text-white;
+      }  
+  }
+  
+  .danger.button {
+    @apply 
+      bg-red-600 text-white
+      hover:bg-red-500;
+  
+      fa-icon {
+        @apply text-white;
+      }  
+  }
+  
+  .warning.button {
+    @apply 
+      bg-yellow-400 text-white
+      hover:bg-yellow-300;
+  
+      fa-icon {
+        @apply text-white;
+      }  
+  }
+  
+  .info.button {
+    @apply 
+      bg-blue-500 text-white
+      hover:bg-blue-400;
+  
+      fa-icon {
+        @apply text-white;
+      }  
+  }
+
+  .nobg.button {
+    @apply 
+      bg-transparent text-slate-700
+      hover:text-slate-500
+      px-1.5
+      shadow-none;
+  
+      fa-icon {
+        @apply hidden;
+      }  
+  }
