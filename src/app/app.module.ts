@@ -10,9 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { GraphWidgetComponent } from './components/graph-widget/graph-widget.component';
 import { ThreeWidgetComponent } from './components/three-widget/three-widget.component';
-
-import { SocketProviderService } from './services/socket-provider.service';
-import { PresetManagerService } from './services/preset-manager.service';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 
 @NgModule({
@@ -20,7 +18,8 @@ import { PresetManagerService } from './services/preset-manager.service';
     AppComponent,
     DashboardComponent,
     GraphWidgetComponent,
-    ThreeWidgetComponent
+    ThreeWidgetComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +28,7 @@ import { PresetManagerService } from './services/preset-manager.service';
     GridsterItemComponent,
     FontAwesomeModule
   ],
-  providers: [
-    SocketProviderService,
-    PresetManagerService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

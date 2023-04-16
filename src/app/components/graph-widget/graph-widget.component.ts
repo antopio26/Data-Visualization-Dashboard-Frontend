@@ -16,13 +16,17 @@ Chart.register(...registerables);
 export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
   
   public chart: any;
+  public canvasId: string = 'canvas-' + Math.random().toString(36).substr(2, 9);
 
   @Input() public config: any;
 
   constructor(private sockets: SocketProviderService) {}
 
   ngAfterViewInit() {
-    this.createChart();
+
+
+    // Create chart
+    this.createChart(this.canvasId);
     
     // Configure datasets
     this.configureDatasets();
@@ -78,7 +82,7 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
     this.chart.update('none');
   }
 
-  private createChart() {
+  private createChart(id: string) {
     // TODO: maybe make configurable 
     let scalesOptions: any =  {
       x: {
@@ -111,8 +115,7 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
     // TODO: maybe make configurable: legend ecc.
     let pluginsOptions: any = {
       title: {
-        display: this.config.title !== undefined,
-        text: this.config.title,                                // config here
+        display: false
       },
       legend: {
         display: this.config.legend || true,
@@ -129,7 +132,7 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
       }
     }
 
-    this.chart = new Chart(this.config.title, {
+    this.chart = new Chart(id, {
       type: 'line',
       data: { labels: [], datasets: [] },
       options: {

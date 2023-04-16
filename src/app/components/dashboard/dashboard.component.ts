@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { GridsterConfig, GridsterConfigService, GridsterItem, GridType }  from 'angular-gridster2';
 
-import { PresetManagerService } from 'src/app/services/preset-manager.service';
+import { LayoutManagerService } from 'src/app/services/layout-manager.service';
+import { ShellBridgeService } from 'src/app/services/shell-bridge.service';
 
 import { faPen, faSave } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
-  selector: 'dashboard',
+  selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -22,7 +23,21 @@ export class DashboardComponent implements OnInit {
 
   public editMode = false;
 
-  constructor(private presets: PresetManagerService) {}
+  constructor(private presets: LayoutManagerService, private shell: ShellBridgeService) {
+    shell.commands.subscribe((command) => {
+      switch (command) {
+        case 'edit':
+          this.setEditMode(true);
+          break;
+        case 'save':
+          this.setEditMode(false);
+          break;
+        case 'cancel':
+          this.setEditMode(false);
+          break;
+      }
+    });
+  }
 
   ngOnInit() {
     this.options = {
@@ -40,7 +55,7 @@ export class DashboardComponent implements OnInit {
       draggable: { enabled: false }
     };
 
-    this.dashboard = this.presets.loadPreset('test');
+    this.dashboard = this.presets.loadLayout('test');
   }
 
   changedOptions() {

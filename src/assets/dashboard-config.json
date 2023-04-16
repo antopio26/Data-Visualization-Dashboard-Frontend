@@ -61,7 +61,6 @@
                 "event": "gyro"
             },
             "lineWidth": 2,
-            "dataKey": "z",
             "datasets": [
                 {
                     "label": "Z",

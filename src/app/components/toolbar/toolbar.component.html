@@ -1,0 +1,33 @@
+<header class="flex justify-start items-center bg-slate-50 border">
+    <div class="flex-[0_0_10%] px-5 py-3.5">
+        <h1 class="text-3xl font-mono font-bold tracking-tight text-slate-900 ">Dashboard</h1>
+    </div>
+
+
+    <div class="flex-auto mx-auto px-5">
+        <button class="button lg:mx-5 md:mx-3 nobg">
+            Add
+        </button>
+        <button class="button lg:mx-5 md:mx-3 nobg">
+            Layouts
+        </button>
+        <button class="button lg:mx-5 md:mx-3 nobg">
+            Sockets
+        </button>
+    </div>
+
+
+    <div class="mx-auto px-5">
+        <button *ngIf="!editMode" class="button nobg" (click)="edit()">
+            Edit
+        </button>
+
+        <button *ngIf="editMode" class="button primary mr-3" (click)="save()">
+            Save
+        </button>
+
+        <button *ngIf="editMode" class="button secondary" (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+</header>

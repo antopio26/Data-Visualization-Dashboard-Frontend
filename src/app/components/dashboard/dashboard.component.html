@@ -1,35 +1,9 @@
-<div class="flex flex-col h-screen">
-    <header class="flex justify-between items-center bg-slate-50 border">
-        <div class="flex-1 mx-auto px-5 py-3.5">
-            <h1 class="text-3xl font-mono font-bold tracking-tight text-slate-900 ">Dashboard</h1>
-        </div>
-
-
-
-        <div class="self-end mx-auto px-5 py-3">
-            <button *ngIf="!editMode" class="button nobg" (click)="toggleEditMode()">
-                Edit
-            </button>
-
-            <button *ngIf="editMode" class="button primary mr-3" (click)="toggleEditMode()">
-                Save
-            </button>
-
-            <button *ngIf="editMode" class="button secondary" (click)="toggleEditMode()">
-                Cancel
-            </button>
-        </div>
-    </header>
-
-    <main class="flex-auto">
-        <div class="h-full">
-            <gridster *ngIf="dashboard.length" [options]="options" class="bg-white">
-                <gridster-item [item]="item" *ngFor="let item of dashboard" class="shadow-lg border flex flex-col rounded-md">
-                    <!-- Select between graph widget and three widget based on item.type -->
-                    <app-graph-widget [config]="item.config" *ngIf="item.type === 'graph'"></app-graph-widget>
-                    <app-three-widget [config]="item.config" *ngIf="item.type === 'three'"></app-three-widget>
-                </gridster-item>
-            </gridster>
-        </div>
-    </main>
+<div class="h-full">
+    <gridster *ngIf="dashboard.length" [options]="options" class="bg-white">
+        <gridster-item [item]="item" *ngFor="let item of dashboard" [class.shadow-md]="!editMode" [class.shadow-lg]="editMode" class="border sh flex flex-col rounded-md">
+            <!-- Select between graph widget and three widget based on item.type -->
+            <app-graph-widget [config]="item.config" *ngIf="item.type === 'graph'"></app-graph-widget>
+            <app-three-widget [config]="item.config" *ngIf="item.type === 'three'"></app-three-widget>
+        </gridster-item>
+    </gridster>
 </div>
