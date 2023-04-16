@@ -1,22 +1,17 @@
-- Gestione Preset
+# Bottoni toolbar
 
-- Widget title Monospace
+- Socket ---> Altra pagina con lista dei socket, impostazioni e stato del socket
+- Layout ---> Tendina con:
+                - Salva su file
+                - Carica da file
+                - Lista Layout caricati
 
-- Migliore gestione degli stili dei bottoni
+- Add Widget (?? solo con edit mode ??) ---> Modal con widget e impostazioni 
 
-- !!! Barra superiore interattiva per la edit mode !!!
-    
-- Tasto di aggiunta widget (in edit mode)
-             |
-            \ /
-             v
-- Modal di aggiunta widget
-
-- Animazione ombre in ingresso e uscita da edit mode
-
-- Tendina aggiunta
-    - Socket
-
-- Load an Save Presets and Socket to file
+# Widgets
 
 - ThreeJS widget
+
+# Features
+
+- Load an Save Presets and Socket to file
