@@ -3,6 +3,7 @@ import { SocketProviderService } from './services/socket-provider.service';
 import { LayoutManagerService } from './services/layout-manager.service';
 
 import DashboardConfig from 'src/assets/dashboard-config.json';
+import { ShellBridgeService } from './services/shell-bridge.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,25 @@ import DashboardConfig from 'src/assets/dashboard-config.json';
 export class AppComponent {
   title = '3D-Visualization-Frontend';
 
-  constructor(private sockets: SocketProviderService, private presets: LayoutManagerService) {
+  public selectedTab = 'dashboard';
+
+  constructor(private sockets: SocketProviderService, private presets: LayoutManagerService, private shell: ShellBridgeService) {
     this.sockets.addSocket('backend', 'http://localhost:5050');
 
     this.presets.saveLayout('test', DashboardConfig);
+
+    shell.commands.subscribe((command) => {
+      switch (command) {
+        case 'dashboard':
+          this.selectedTab = 'dashboard';
+          break;
+        case 'sockets':
+          this.selectedTab = 'sockets';
+          break;
+      }
+    });
   }
+
+
+
 }

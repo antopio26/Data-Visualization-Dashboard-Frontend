@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GraphWidgetComponent } from './components/graph-widget/graph-widget.component';
 import { ThreeWidgetComponent } from './components/three-widget/three-widget.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SocketPageComponent } from './components/socket-page/socket-page.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     DashboardComponent,
     GraphWidgetComponent,
     ThreeWidgetComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    SocketPageComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,12 @@ export class ToolbarComponent {
   constructor(private shell: ShellBridgeService) { }
 
   public editMode = false;
+  public page = 'dashboard';
+
+  gotoPage(page: string) {
+    this.shell.commands.next(page);
+    this.page = page;
+  }
 
   edit() {
     this.shell.commands.next('edit');

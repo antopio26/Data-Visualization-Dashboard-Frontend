@@ -1,0 +1,27 @@
+<div class="">
+    
+  <!-- <div class="p-5">
+      <h2 class="text-lg font-mono font-semibold leading-7 text-gray-900">Socket list</h2>
+    </div> -->
+    <div class="border rounded-lg overflow-hidden m-5">
+      <table class="table-auto divide-y min-w-full">
+        <thead class="bg-slate-50">
+          <tr class="text-left">
+            <th>Name</th>
+            <th>URL</th>
+            <th>Status</th>
+            <th>Conections</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          <tr *ngFor="let key of socketProvider.socketKeys">
+            <td>{{key}}</td>
+            <td><a [href]="socketProvider.sockets[key].ioSocket.io.uri">{{socketProvider.sockets[key].ioSocket.io.uri}}</a></td>
+            <td>{{socketProvider.sockets[key].ioSocket.connected ? "Connected" : socketProvider.socketCaptures[key] ? "Unreachable" : "Inactive"}}</td>
+            <td>{{socketProvider.socketCaptures[key]}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

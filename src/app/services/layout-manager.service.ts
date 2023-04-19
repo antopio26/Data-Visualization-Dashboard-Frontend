@@ -24,11 +24,11 @@ export class LayoutManagerService {
     localStorage.setItem('layouts', JSON.stringify([...this.listLayout(), layoutName]));
   }
 
-  public loadLayout(layoutName: string): GridsterItem[] {
+  public loadLayout(layoutName: string): Array<any> {
     return JSON.parse(localStorage.getItem(layoutName) || '[]');
   }
 
-  public listLayout() {
+  public listLayout(): Array<string> {
     return JSON.parse(localStorage.getItem('layouts') || '[]');
   }
 

@@ -2,22 +2,28 @@
 
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
+import { Observable, count } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketProviderService {
 
-  private sockets: Record<string, Socket> = {};
-  private socketCaptures: Record<string, number> = {};
-  private eventObservables: Record<string, Observable<unknown>> = {};
+  public sockets: Record<string, Socket> = {};
+  public socketKeys: string[] = [];
+  public socketCaptures: Record<string, number> = {};
+  public eventObservables: Record<string, Observable<unknown>> = {};
 
   constructor() { }
+
+  updateSocketKeys() {
+    this.socketKeys = Object.keys(this.sockets);
+  }
 
   addSocket(socketName: string, socketUrl: string, socketOptions: any = {}) {
     this.sockets[socketName] = new Socket({ url: socketUrl, options: socketOptions });
     this.socketCaptures[socketName] = 0;
+    this.updateSocketKeys();
   }
 
   removeSocket(socketName: string) {
@@ -29,12 +35,35 @@ export class SocketProviderService {
     }
     delete this.sockets[socketName];
     delete this.socketCaptures[socketName];
+    this.updateSocketKeys();
   }
 
+  // Error when no socket is found
   findSocket(socketUrl: string) {
     return Object.keys(this.sockets).find((socketName) => {
       return this.sockets[socketName].ioSocket.io.uri === socketUrl;
     });
+  }
+
+  getSocket(socketName: string) {
+    if(!this.sockets[socketName]) {
+      throw new Error('Socket not found');
+    }
+    return this.sockets[socketName];
+  }
+
+  getSocketUrl(socketName: string) {
+    if(!this.sockets[socketName]) {
+      throw new Error('Socket not found');
+    }
+    return this.sockets[socketName].ioSocket.io.uri;
+  }
+
+  getSocketStatus(socketName: string) {
+    if(!this.sockets[socketName]) {
+      throw new Error('Socket not found');
+    }
+    return this.sockets[socketName].ioSocket.connected;
   }
 
   captureSocket(socketName: string) {
@@ -57,6 +86,7 @@ export class SocketProviderService {
     this.socketCaptures[socketName]--;
     if(this.socketCaptures[socketName] === 0) {
       this.disconnectSocket(socketName);
+      console.log(this.sockets[socketName]);
     }
   }
 
@@ -92,10 +122,10 @@ export class SocketProviderService {
 
   saveSocket(socketName: string, socketUrl: string, socketOptions: any = {}) {
     localStorage.setItem(socketName, JSON.stringify({ url: socketUrl, options: socketOptions }));
-    localStorage.setItem('sockets', JSON.stringify([...this.listSockets(), socketName]));
+    localStorage.setItem('sockets', JSON.stringify([...this.listSavedSockets(), socketName]));
   }
 
-  listSockets() {
+  listSavedSockets() {
     let loscketList = localStorage.getItem('sockets');
     if(!loscketList) {
       localStorage.setItem('sockets', '[]');
@@ -105,7 +135,7 @@ export class SocketProviderService {
   }
 
   loadSockets() {
-    this.listSockets().forEach((socketName: string) => {
+    this.listSavedSockets().forEach((socketName: string) => {
       let socketData = JSON.parse(localStorage.getItem(socketName) || '{}');
       this.addSocket(socketName, socketData.url, socketData.options);
     });
@@ -116,7 +146,7 @@ export class SocketProviderService {
   }
 
   clearSockets() {
-    this.listSockets().forEach((socketName: string) => {
+    this.listSavedSockets().forEach((socketName: string) => {
       this.deleteSocket(socketName);
     });
   }
