@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,12 @@ import { ThreeWidgetComponent } from './components/three-widget/three-widget.com
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SocketPageComponent } from './components/socket-page/socket-page.component';
 
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +32,16 @@ import { SocketPageComponent } from './components/socket-page/socket-page.compon
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     GridsterComponent,
     GridsterItemComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TableModule,
+    ToastModule,
+    DropdownModule,
+    ButtonModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]

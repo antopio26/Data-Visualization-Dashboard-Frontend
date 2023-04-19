@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SocketProviderService } from './services/socket-provider.service';
+import { SocketManagerService } from './services/socket-manager.service';
 import { LayoutManagerService } from './services/layout-manager.service';
 
 import DashboardConfig from 'src/assets/dashboard-config.json';
@@ -15,7 +15,7 @@ export class AppComponent {
 
   public selectedTab = 'dashboard';
 
-  constructor(private sockets: SocketProviderService, private presets: LayoutManagerService, private shell: ShellBridgeService) {
+  constructor(private sockets: SocketManagerService, private presets: LayoutManagerService, private shell: ShellBridgeService) {
     this.sockets.addSocket('backend', 'http://localhost:5050');
 
     this.presets.saveLayout('test', DashboardConfig);

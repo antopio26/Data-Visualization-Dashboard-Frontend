@@ -4,8 +4,6 @@ import { GridsterConfig, GridsterConfigService, GridsterItem, GridType }  from '
 import { LayoutManagerService } from 'src/app/services/layout-manager.service';
 import { ShellBridgeService } from 'src/app/services/shell-bridge.service';
 
-import { faPen, faSave } from '@fortawesome/free-solid-svg-icons'
-
 @Component({
   selector: 'app-dashboard',
   host: {
@@ -20,9 +18,6 @@ export class DashboardComponent implements OnInit {
 
   public options: GridsterConfig = GridsterConfigService;
   public dashboard: Array<any> = [];
-
-  public faPen = faPen;
-  public faSave = faSave;
 
   public editMode = false;
 

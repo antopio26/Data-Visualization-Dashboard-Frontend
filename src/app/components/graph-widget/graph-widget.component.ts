@@ -2,7 +2,7 @@
 
 import { Component, AfterViewInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { SocketProviderService } from 'src/app/services/socket-provider.service';
+import { SocketManagerService } from 'src/app/services/socket-manager.service';
 
 Chart.register(...registerables);
 
@@ -20,7 +20,7 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
 
   @Input() public config: any;
 
-  constructor(private sockets: SocketProviderService) {}
+  constructor(private sockets: SocketManagerService) {}
 
   ngAfterViewInit() {
 
