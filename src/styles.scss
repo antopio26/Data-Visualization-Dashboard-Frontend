@@ -3,8 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "node_modules/primeng/resources/themes/mira/theme.css";
+@import "node_modules/primeng/resources/primeng.min.css";
+@import "primeicons/primeicons.css";
+
 @import "./styles/buttons.scss";
 
 a {
   @apply text-blue-600 hover:text-blue-800 underline underline-offset-2;
+}
+
+input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }

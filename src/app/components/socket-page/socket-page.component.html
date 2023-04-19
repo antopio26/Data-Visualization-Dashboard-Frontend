@@ -1,27 +1,98 @@
-<div class="">
+<div>
     
   <!-- <div class="p-5">
       <h2 class="text-lg font-mono font-semibold leading-7 text-gray-900">Socket list</h2>
     </div> -->
+    <p-toast></p-toast>
+    <p-dialog header="New Socket" [(visible)]="visible" [style]="{ width: '50vw' }">
+        <div class="flex py-2 justify-content-center">
+            <div class="flex flex-col flex-1 gap-2 pr-5">
+                <label htmlFor="name">Name</label>
+                <input pInputText id="name" [(ngModel)]="newSocket.name" />
+            </div>
+            <div class="flex flex-col flex-1 gap-2">
+                <label htmlFor="url">URL</label>
+                <input pInputText id="url" [(ngModel)]="newSocket.url" />
+            </div>
+        </div>
+        <p-footer>
+            <div class="ui-dialog-buttonpane p-clearfix">
+                <button pButton type="button" icon="pi pi-check" label="Save" (click)="saveSocket(newSocket)" class="p-button-success"></button>
+                <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="hideDialog()" class="p-button-secondary"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
     <div class="border rounded-lg overflow-hidden m-5">
-      <table class="table-auto divide-y min-w-full">
-        <thead class="bg-slate-50">
-          <tr class="text-left">
-            <th>Name</th>
-            <th>URL</th>
-            <th>Status</th>
-            <th>Conections</th>
+    
+    <p-table [value]="sockets" dataKey="name" editMode="row" styleClass="min-w-[60rem]" [scrollable]="true" scrollHeight="calc(100vh - 120px)" scrollDirection="both">
+        <ng-template pTemplate="header">
+            <tr>
+                <th class="w-[20%]">Name</th>
+                <th class="w-[30%]">URL</th>
+                <th class="w-[20%]">Status</th>
+                <th class="w-[15%]">Connections</th>
+                <th class="w-[10%]">Actions</th>
+                <th class="w-[5%]">
+                    <p-button icon="pi pi-plus" styleClass="p-button-rounded p-button-text p-button-secondary" (click)="showAddDialog()"></p-button>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-socket let-editing="editing" let-ri="rowIndex">
+          <tr [pEditableRow]="socket">
+              <td>
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          {{socket.name}}
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{socket.name}}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td>
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input pInputText type="text" class="w-[80%]" [(ngModel)]="socket.url" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          <a [href]="socket.url">{{socket.url}}</a>
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+              <td>
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <i class="inline pi pi-circle-fill text-gray-400 pr-3 text-sm"></i>
+                        <p class="inline">{{socket.status}}</p>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <i class="inline pi pi-circle-fill text-gray-400 pr-3 text-sm" [ngClass]="{'text-green-600': socket.status === 'Connected', 'text-red-600': socket.status === 'Unreachable',  'text-yellow-500': socket.status === 'Inactive'}"></i>
+                        <p class="inline-block">{{socket.status}}</p>
+                    </ng-template>
+                </p-cellEditor>
+              </td>
+              <td class="content-center">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        {{socket.captures}}
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{socket.captures}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+              <td>
+                <div class="flex align-items-center justify-content-center gap-2 m-[-0.5rem]">
+                    <p-button *ngIf="!editing" icon="pi pi-pencil" pInitEditableRow styleClass="p-button-rounded p-button-text" (click)="onRowEditInit(socket)"></p-button>
+                    <p-button *ngIf="!editing" icon="pi pi-trash" styleClass="p-button-rounded p-button-text p-button-danger" (click)="deleteSocket(socket)"></p-button>
+                    <p-button *ngIf="editing" icon="pi pi-check" pSaveEditableRow styleClass="p-button-rounded p-button-text p-button-success mr-2" (click)="onRowEditSave(socket)"></p-button>
+                    <p-button *ngIf="editing" icon="pi pi-times" pCancelEditableRow styleClass="p-button-rounded p-button-text p-button-danger" (click)="onRowEditCancel(socket, ri)"></p-button>
+                </div>
+              </td>
+              <td></td>
           </tr>
-        </thead>
-        <tbody class="divide-y">
-          <tr *ngFor="let key of socketProvider.socketKeys">
-            <td>{{key}}</td>
-            <td><a [href]="socketProvider.sockets[key].ioSocket.io.uri">{{socketProvider.sockets[key].ioSocket.io.uri}}</a></td>
-            <td>{{socketProvider.sockets[key].ioSocket.connected ? "Connected" : socketProvider.socketCaptures[key] ? "Unreachable" : "Inactive"}}</td>
-            <td>{{socketProvider.socketCaptures[key]}}</td>
-          </tr>
-        </tbody>
-      </table>
+        </ng-template>
+    </p-table>
     </div>
   </div>
   

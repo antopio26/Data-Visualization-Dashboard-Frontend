@@ -2,7 +2,7 @@
 
 import { Component, AfterViewInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { SocketProviderService } from 'src/app/services/socket-provider.service';
+import { SocketManagerService } from 'src/app/services/socket-manager.service';
 
 Chart.register(...registerables);
 
@@ -20,11 +20,9 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
 
   @Input() public config: any;
 
-  constructor(private sockets: SocketProviderService) {}
+  constructor(private sockets: SocketManagerService) {}
 
   ngAfterViewInit() {
-
-
     // Create chart
     this.createChart(this.canvasId);
     
@@ -35,15 +33,26 @@ export class GraphWidgetComponent implements AfterViewInit, OnDestroy {
     this.sockets.captureSocket(this.config.socket.name);           // config here 
 
     // Subscribe to data socket
-    this.sockets.event(this.config.socket.name, this.config.socket.event).subscribe((data: any) => {      // config here
-      let dataList = this.config.datasets.map((dataset: any) => data.value[dataset.key]);                 // config here
-      this.addData('', dataList);
+    this.subcribeToSocket();
+
+    this.sockets.commands.subscribe((command: any) => {
+      if(command.cmd === 'refresh' && command.socket === this.config.socket.name) {
+        this.sockets.captureSocket(this.config.socket.name);
+        this.subcribeToSocket();
+      }
     });
   }
 
   ngOnDestroy() {
     this.sockets.releaseSocket(this.config.socket.name);           // config here
     this.chart.destroy();
+  }
+
+  subcribeToSocket() {
+    this.sockets.event(this.config.socket.name, this.config.socket.event).subscribe((data: any) => {      // config here
+      let dataList = this.config.datasets.map((dataset: any) => data.value[dataset.key]);                 // config here
+      this.addData('', dataList);
+    });
   }
 
   private configureDatasets() {
