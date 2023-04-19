@@ -1,12 +1,10 @@
-import { NgModule } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 
-
 export enum SocketStatus {
-    CONNECTED = 'connected',
-    INACTIVE = 'inactive',
-    UNREACHABLE = 'unreachable'
+    CONNECTED = 'Connected',
+    INACTIVE = 'Inactive',
+    UNREACHABLE = 'Unreachable'
 }
 
 export class SharedSocket extends Socket {

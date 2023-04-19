@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { SharedSocket, SocketStatus } from '../classes/shared-socket';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,10 @@ import { Observable } from 'rxjs';
 export class SocketManagerService {
 
   private _sockets: Record<string, SharedSocket> = {};
-
   public socketKeys: string[] = [];
+
+  public commands: Subject<any> = new Subject();
+
   get sockets(): SharedSocket[] {
     return Object.values(this._sockets);
   }
@@ -36,6 +38,23 @@ export class SocketManagerService {
     }
     delete this._sockets[socketName];
     this.updateSocketKeys();
+  }
+
+  changeSocketUrl(socketName: string, socketUrl: string): void {
+    if(!this._sockets[socketName]) {
+      throw new Error('Socket not found');
+    }
+    if(this._sockets[socketName].url === socketUrl) {
+      return;
+    }
+    this._sockets[socketName].disconnect();
+
+    let socketOptions = this._sockets[socketName].options;
+
+    this.addSocket(socketName, socketUrl);
+    this._sockets[socketName].options = socketOptions;
+
+    this.commands.next({cmd: 'refresh', socket: socketName});
   }
 
   getSocket(socketName: string): SharedSocket {
